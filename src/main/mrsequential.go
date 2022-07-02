@@ -13,7 +13,7 @@ import "os"
 import "log"
 import "io/ioutil"
 import "sort"
-
+//定义mr.KeyValue类型的ByKey
 // for sorting by key.
 type ByKey []mr.KeyValue
 
@@ -54,8 +54,8 @@ func main() {
 	// a big difference from real MapReduce is that all the
 	// intermediate data is in one place, intermediate[],
 	// rather than being partitioned into NxM buckets.
-	//
-
+	//-------中间处理过程
+//1. 将map的结果排序
 	sort.Sort(ByKey(intermediate))
 
 	oname := "mr-out-0"
@@ -75,6 +75,8 @@ func main() {
 		for k := i; k < j; k++ {
 			values = append(values, intermediate[k].Value)
 		}
+
+		// 2. 将相同key值使用values数组盛放 并且输入reduce函数
 		output := reducef(intermediate[i].Key, values)
 
 		// this is the correct format for each line of Reduce output.

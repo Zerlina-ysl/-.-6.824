@@ -10,17 +10,21 @@ package main
 // Please do not change this file.
 //
 
-import "6.824/mr"
+import (
+	"6.824/mr"
+	"fmt"
+)
 import "plugin"
 import "os"
-import "fmt"
+//import "fmt"
 import "log"
 
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Fprintf(os.Stderr, "Usage: mrworker xxx.so\n")
-		os.Exit(1)
-	}
+	//if len(os.Args) != 2 {
+	//	fmt.Fprintf(os.Stderr, "Usage: mrworker xxx.so\n")
+	//	fmt.Println("os.Args的个数不符合要求",len(os.Args))
+	//	os.Exit(1)
+	//}
 
 	mapf, reducef := loadPlugin(os.Args[1])
 
@@ -32,6 +36,7 @@ func main() {
 // from a plugin file, e.g. ../mrapps/wc.so
 //
 func loadPlugin(filename string) (func(string, string) []mr.KeyValue, func(string, []string) string) {
+	fmt.Println(filename)
 	p, err := plugin.Open(filename)
 	if err != nil {
 		log.Fatalf("cannot load plugin %v", filename)

@@ -8,11 +8,10 @@ package main
 //
 // Please do not change this file.
 //
-
-import "6.824/mr"
 import "time"
 import "os"
 import "fmt"
+import "6.824/mr"
 
 func main() {
 	if len(os.Args) < 2 {
